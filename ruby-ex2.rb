@@ -10,9 +10,9 @@ def make_change num
 		while num / coin >= 1
 			num = num - coin
 			change << coin
-			p change
 		end
 	end
+	p change
 end
 
 make_change 139
