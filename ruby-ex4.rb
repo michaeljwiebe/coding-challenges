@@ -5,12 +5,12 @@ require 'minitest/pride'
 #   * 'last_name': given a name in string, return the last name.
 
 def first_name string
-    string == "" ? return ""
+    string == string.split(" ")
     split_string = string.split(" ")
     split_string.length > 1 ? split_string.pop.join(" ") : split_string.first
 end
 def last_name string
-    string == "" ? return ""
+    string == string.split(" ")
     split_string = string.split(" ")
     split_string.length > 1 ? split_string.last : ""
 end
