@@ -8,24 +8,36 @@
     <script>
     var app = angular.module("listApp", []);
 app.directive("addListItem", function() {
+	listToDo.push(newListItem);
+	newListItem = "";
+	console.log(newListItem);
 	return {
 		template: "<li>{{newListItem}}</li>"
 	};
 });
 app.controller("ctrl", function($scope) {
 	$scope.listToDo = ["Go for a run", "Make dinner", "Hang out with friends"];
+	$scope.newListItem = "";
+	$scope.addListItem = function(newItem) {
+		$scope.listToDo.push(newItem);
+		$scope.newListItem = "";
+	};
+	$scope.removeItem = function(itemToRemove) {
+		$scope.listToDo.splice($scope.listToDo.indexOf(itemToRemove), 1);
+	};
 });
 </script>
-	<title></title>
+	<title>AngularJS practice</title>
 </head>
 <body>
     <div ng-app="listApp" ng-controller="ctrl">
         <input type="text" ng-model="newListItem">
-        <button click="addListItem">Add Item</button>
+        <button ng-click="addListItem(newListItem)">Add Item</button>
         <ul>
-            <li ng-repeat="toDo in listToDo">{{ toDo }}</li>
-            {{addListItem}}
-            <!-- <li>{{ newListItem }}</li> -->
+            <li ng-repeat="toDo in listToDo track by $index">
+                <button ng-click="removeItem(toDo)">Done</button>
+                {{ toDo }}
+            </li>
         </ul>
 
     </div
