@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/6.0.0/normalize.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+    var app = angular.module("listApp", []);
+app.directive("addListItem", function() {
+	return {
+		template: "<li>{{newListItem}}</li>"
+	};
+});
+app.controller("ctrl", function($scope) {
+	$scope.listToDo = ["Go for a run", "Make dinner", "Hang out with friends"];
+});
+</script>
+	<title></title>
+</head>
+<body>
+    <div ng-app="listApp" ng-controller="ctrl">
+        <input type="text" ng-model="newListItem">
+        <button click="addListItem">Add Item</button>
+        <ul>
+            <li ng-repeat="toDo in listToDo">{{ toDo }}</li>
+            {{addListItem}}
+            <!-- <li>{{ newListItem }}</li> -->
+        </ul>
+
+    </div
+</body>
+</html>

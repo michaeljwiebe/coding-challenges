@@ -17,18 +17,35 @@
 // Use the javaScript .map() function to turn [“Chris”, “Emily”, “Oggi”] into [“Chris works here”, “Emily works here”, “Oggi works here”]
 // Then, do it in Ruby on one line.
 
+var nums = [10, 15, 20];
+var doubledNums = [];
 
-var nums = [10,15,20];
-var doubledNums = nums.map(function(num){
-    return num * 2;
-})
+function doubleNums(numbers) {
+	var doubled = numbers.map(function(num) {
+		return num * 2;
+	});
+	return doubled;
+}
+
+doubleNums(nums);
+
+nums.map(function(num) {
+	return num * 5;
+});
+
+var nums = [10, 15, 20];
+var doubledNums = nums.map(function(num) {
+	return num * 2;
+});
 
 console.log(doubledNums);
 
 var names = ["chris", "oggi", "emily"];
 
-var worksHere = names.map(function(name){
-    return name + " works here";
-})
+var worksHere = names.map(function(name) {
+	return name + " works here";
+});
 
 console.log(worksHere);
+
+var object = {};
