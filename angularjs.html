@@ -7,38 +7,57 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
     var app = angular.module("listApp", []);
-app.directive("addListItem", function() {
-	listToDo.push(newListItem);
-	newListItem = "";
-	console.log(newListItem);
-	return {
-		template: "<li>{{newListItem}}</li>"
-	};
-});
+
+//Apparently this is not how you use a directive. Instead all the functionality of this app is built into the app.controller.
+// app.directive("addListItem", function() {
+// 	listToDo.push(newListItem);
+// 	newListItem = "";
+// 	console.log(newListItem);
+// 	return {
+// 		template: "<li>{{newListItem}}</li>"
+// 	};
+// });
+
 app.controller("ctrl", function($scope) {
 	$scope.listToDo = ["Go for a run", "Make dinner", "Hang out with friends"];
+	$scope.lists = [$scope.listToDo];
+	$scope.titles = ["To Do"];
 	$scope.newListItem = "";
-	$scope.addListItem = function(newItem) {
-		$scope.listToDo.push(newItem);
+	$scope.addListItem = function(newItem, list) {
+		let currentList = $scope.lists[$scope.lists.indexOf(list)];
+		currentList.push(newItem);
 		$scope.newListItem = "";
 	};
-	$scope.removeItem = function(itemToRemove) {
-		$scope.listToDo.splice($scope.listToDo.indexOf(itemToRemove), 1);
+	$scope.removeItem = function(itemToRemove, list) {
+		let currentList = $scope.lists[$scope.lists.indexOf(list)];
+		currentList.splice($scope.listToDo.indexOf(itemToRemove), 1);
+	};
+	$scope.addList = function(title, list) {
+		$scope.titles.push(title);
+		$scope.lists.push([]);
 	};
 });
 </script>
 	<title>AngularJS practice</title>
 </head>
 <body>
+	<h1>List Generator App</h1>
     <div ng-app="listApp" ng-controller="ctrl">
-        <input type="text" ng-model="newListItem">
-        <button ng-click="addListItem(newListItem)">Add Item</button>
-        <ul>
-            <li ng-repeat="toDo in listToDo track by $index">
-                <button ng-click="removeItem(toDo)">Done</button>
-                {{ toDo }}
-            </li>
-        </ul>
+		<input type="text" ng-model="newList">
+		<button ng-click="addList(newList)">Build New List</button>
+		<div ng-repeat="list in lists track by $index">
+			<h2>{{ titles[lists.indexOf(list)] }}</h2>
+	        <input type="text" ng-model="newListItem">
+	        <button ng-click="addListItem(newListItem, list)">Add Item</button>
+	        <!-- <ul ng-repeat="list in lists track by $index"> -->
+			<ul>
+	            <li ng-repeat="item in list track by $index">
+	                <button ng-click="removeItem(item, list)">Done</button>
+	                {{ item }}
+	            </li>
+	        </ul>
+		</div>
+
 
     </div
 </body>
